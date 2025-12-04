@@ -1,3 +1,0 @@
-# with app.app_context():
-#     for u in User.query.all():
-#         print(u.id, u.username, u.role, u.franchise_id)
