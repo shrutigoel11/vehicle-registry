@@ -1,10 +1,4 @@
-Here is your **complete GitHub-ready README.md** rewritten in proper **Markdown format**, clean, formatted, and copy-paste ready.
 
----
-
-# ✅ **README.md (GitHub Ready Version)**
-
-```md
 # 🚗 Vehicle Registration System
 
 A complete **CRUD-based web application** built using **Flask**, **SQLite**, **Bootstrap UI**, and deployable on **Google Kubernetes Engine (GKE)**.  
@@ -197,4 +191,5 @@ Access app using the **EXTERNAL-IP**.
 ## 👩‍💻 Author
 
 **Shruti Goel**
+
 
