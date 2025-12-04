@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Dashboard</h2>
+
+{% if current_user.role == 'owner' %}
+<a class="btn btn-success mb-3" href="{{ url_for('main.add_vehicle') }}">Add Vehicle</a>
+<a class="btn btn-primary mb-3" href="{{ url_for('main.customers') }}">Manage Customers</a>
+{% endif %}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Vehicle Number</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Color</th>
+            <th>Issue Date</th>
+            <th>Status</th>
+            {% if current_user.role == 'owner' %}
+            <th>Owner</th>
+            <th>Action</th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for vehicle in vehicles %}
+        <tr>
+            <td>{{ vehicle.vehicle_number }}</td>
+            <td>{{ vehicle.make }}</td>
+            <td>{{ vehicle.model }}</td>
+            <td>{{ vehicle.color }}</td>
+            <td>{{ vehicle.issue_date }}</td>
+            <td>{{ vehicle.registration_status }}</td>
+
+            {% if current_user.role == 'owner' %}
+            <td>{{ vehicle.owner.username }}</td>
+            <td>
+                <a class="btn btn-primary btn-sm" href="{{ url_for('main.edit_vehicle', id=vehicle.id) }}">Edit</a>
+
+                <form action="{{ url_for('main.delete_vehicle', id=vehicle.id) }}" 
+                      method="POST" style="display:inline;">
+                    <button class="btn btn-danger btn-sm"
+                            onclick="return confirm('Delete this vehicle?');">
+                        Delete
+                    </button>
+                </form>
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

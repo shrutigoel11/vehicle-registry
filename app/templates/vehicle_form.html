@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if duplicate_error %}
+<script>
+    alert("{{ duplicate_error }}");
+</script>
+{% endif %}
+
+<h2>{{ form.vehicle_number.data or "Add Vehicle" }}</h2>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+        {{ form.vehicle_number.label(class="form-label") }}
+        {{ form.vehicle_number(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+        {{ form.make.label(class="form-label") }}
+        {{ form.make(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+        {{ form.model.label(class="form-label") }}
+        {{ form.model(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+        {{ form.color.label(class="form-label") }}
+        {{ form.color(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+        {{ form.issue_date.label(class="form-label") }}
+        {{ form.issue_date(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+        {{ form.registration_status.label(class="form-label") }}
+        {{ form.registration_status(class="form-select") }}
+    </div>
+
+    <div class="mb-3">
+        {{ form.owner_id.label(class="form-label") }}
+        {{ form.owner_id(class="form-select") }}
+    </div>
+
+    <div class="d-grid">
+        {{ form.submit(class="btn btn-success") }}
+    </div>
+
+</form>
+
+{% endblock %}

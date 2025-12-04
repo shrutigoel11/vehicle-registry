@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Customers</h2>
+
+{% if vehicle_error %}
+<script>
+    alert("{{ vehicle_error }}");
+</script>
+{% endif %}
+
+<a class="btn btn-success mb-3" href="{{ url_for('main.add_customer') }}">Add Customer</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for c in customers %}
+        <tr>
+            <td>{{ c.username }}</td>
+            <td>
+
+                <!-- Edit button -->
+                <a class="btn btn-primary btn-sm"
+                   href="{{ url_for('main.edit_customer', id=c.id) }}">
+                    Edit
+                </a>
+
+                <!-- Delete button -->
+                {% if c.vehicles|length > 0 %}
+                    <!-- Disabled delete button if customer has vehicles -->
+                    <button class="btn btn-danger btn-sm" disabled>
+                        Delete
+                    </button>
+                {% else %}
+                <form action="{{ url_for('main.delete_customer', id=c.id) }}"
+                      method="POST" style="display:inline;">
+                    <button class="btn btn-danger btn-sm"
+                            onclick="return confirm('Delete this customer?');">
+                        Delete
+                    </button>
+                </form>
+                {% endif %}
+
+            </td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+
+{% endblock %}
